@@ -4,7 +4,7 @@ const {StatusCodes} = require('http-status-codes')
 
 
 const getAllJob = async (req,res) => {
-    const jobs = await Job.find({}).sort('createdAt')
+    const jobs = await Job.find({createdBy: req.user.userId}).sort('createdAt')
     res.status(StatusCodes.OK).json({jobs,count: jobs.length})
 }
 const getJob = async (req,res) => {
